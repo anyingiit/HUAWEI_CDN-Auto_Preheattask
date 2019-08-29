@@ -1,6 +1,6 @@
 WebsiteRemoteAddress = r"https://trustme.anyingiit.com"
-WebsitelocalPath = r"C:\Users\AnYing\Desktop\myblog\blog\public"
-WebsitelocaGitlPath = r"F:\项目\#clone\yunfan-eschool"
+WebsitelocalPath = r"/root/source/HUAWEI_CDN-Auto_Preheattask"
+WebsitelocaGitlPath = r"/root/source/HUAWEI_CDN-Auto_Preheattask"
 
 cdnPath = 'https://cdn.myhwclouds.com/v1.0'
 projectId = "05fd90c811800f822f69c019402fcc84"
