@@ -17,7 +17,7 @@ def getDirFileName(path):
                 filePath = str(os.path.join(rootPath, file)) # 获取文件完整位置
 
 
-                filePath = filePath.replace(path, globalVariable.RemoteAddress) # 将本地路径转换为博客
+                filePath = filePath.replace(path, globalVariable.WebsiteRemoteAddress) # 将本地路径转换为博客
                 filePath = filePath.replace("\\", "/") # 将 \ 转换为 /
 
                 temp = filePath.split(":") #通过 : 把URL截断成两个部分

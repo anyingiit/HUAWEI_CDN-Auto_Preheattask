@@ -1,5 +1,6 @@
-RemoteAddress = r"https://trustme.anyingiit.com"
-localPath = r"C:\Users\AnYing\Desktop\myblog\blog\public"
+WebsiteRemoteAddress = r"https://trustme.anyingiit.com"
+WebsitelocalPath = r"C:\Users\AnYing\Desktop\myblog\blog\public"
+WebsitelocaGitlPath = r"F:\项目\#clone\yunfan-eschool"
 
 cdnPath = 'https://cdn.myhwclouds.com/v1.0'
 projectId = "05fd90c811800f822f69c019402fcc84"
