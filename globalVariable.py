@@ -1,6 +1,6 @@
 WebsiteRemoteAddress = r"https://trustme.anyingiit.com"
-WebsitelocalPath = r"/root/source/HUAWEI_CDN-Auto_Preheattask"
-WebsitelocaGitlPath = r"/root/source/HUAWEI_CDN-Auto_Preheattask"
+WebsitelocalPath = r"/root/source/anyingiit.github.io"
+WebsitelocaGitlPath = r"/root/source/anyingiit.github.io"
 
 cdnPath = 'https://cdn.myhwclouds.com/v1.0'
 projectId = "05fd90c811800f822f69c019402fcc84"
