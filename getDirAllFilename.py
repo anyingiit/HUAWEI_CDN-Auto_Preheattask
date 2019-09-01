@@ -13,6 +13,8 @@ def getDirFileName(path):
     try:
         for rootPath, dirList, fileList in os.walk(path):
             for file in fileList:
+                if '.git' in rootPath:
+                    continue
                 print(os.path.join(rootPath, file))
                 filePath = str(os.path.join(rootPath, file)) # 获取文件完整位置
 

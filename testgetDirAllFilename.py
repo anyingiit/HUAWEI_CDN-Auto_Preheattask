@@ -1,6 +1,9 @@
 import os
 from urllib.parse import quote
-import globalVariable
+#import globalVariable
+
+path = r"C:\Users\AnYing\Desktop\testFulldir"
+exclude = set(".git")
 
 def getDirFileName(path):
     datas = []
@@ -13,11 +16,13 @@ def getDirFileName(path):
     try:
         for rootPath, dirList, fileList in os.walk(path):
             for file in fileList:
+                if '.git' in rootPath:
+                    continue
                 print(os.path.join(rootPath, file))
                 filePath = str(os.path.join(rootPath, file)) # 获取文件完整位置
 
 
-                filePath = filePath.replace(path, globalVariable.WebsiteRemoteAddress) # 将本地路径转换为博客
+                filePath = filePath.replace(path,r"https://trustme.anyingiit.com") # 将本地路径转换为博客
                 filePath = filePath.replace("\\", "/") # 将 \ 转换为 /
 
                 temp = filePath.split(":") #通过 : 把URL截断成两个部分
@@ -34,4 +39,4 @@ def getDirFileName(path):
         print("处理文件名时出现异常!其他错误!", e)
     return datas
 if __name__ == "__main__":
-	getDirFileName(globalVariable.WebsitelocalPath)
+	getDirFileName(path)
