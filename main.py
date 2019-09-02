@@ -34,9 +34,9 @@ if __name__ == "__main__":
                 lastExecuteTime = time.time()
                 nextExecuteInterval = 1800
         else:
-            print("Execute Command Error!",
+            raise RuntimeError("Execute Command Error!",
                   "command_git_rev_parse_master returnCode:",command_git_rev_parse_master[0],
-                  "command_git_rev_parse_origin_master returnCode:",command_git_rev_parse_origin_master)
+                  "command_git_rev_parse_origin_master returnCode:",command_git_rev_parse_origin_master[0])
         nextExecuteTime = time.time() + nextExecuteInterval
         print("lastExecuteTime ==> ", lastExecuteTime)
         print("nextExecuteTime ==> ", nextExecuteTime)
