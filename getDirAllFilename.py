@@ -2,37 +2,47 @@ import os
 from urllib.parse import quote
 import globalVariable
 
-def getDirFileName(path):
+def getDirFileName(rootDir):
+    exclude = [".git"]
     datas = []
-    if os.path.isdir:
-        pathlist = os.listdir(path)
-        print(pathlist)
+    def localPathStrToAnYingBlogStr(localpath):
+        resultPath = localpath #获取源路径
+        resultPath = resultPath.replace(rootDir, globalVariable.WebsiteRemoteAddress)  # 将本地路径转换为博客
+        resultPath = resultPath.replace("\\", "/")  # 将 \ 转换为 /
+
+        temp = resultPath.split(":")  # 通过 : 把URL截断成两个部分
+        filePathTrunk = {
+            "dir1": temp[0],
+            "dir2": temp[1]
+        }
+        resultPath = filePathTrunk["dir1"] + ":" + quote(filePathTrunk["dir2"])  # 通过 quote 转义https: 后面的内容
+        print("处理后链接:", resultPath)
+        return resultPath
+    def existExcludePath(target):
+        for ex in exclude:
+            if ex in target:
+                return True
+        return False
+    def getDirFileNamePrivate(dir):
+        try:
+            for lists in os.listdir(dir):
+                path = os.path.join(dir, lists)
+                # print(path)
+                if os.path.isdir(path):
+                    if not existExcludePath(path):#如果当前目录不是被排除目录,则进行遍历
+                        getDirFileNamePrivate(path)
+                    else:
+                        print("发现已被排除目录:",path)
+                else:
+                    print(path)
+                    datas.append(localPathStrToAnYingBlogStr(path))
+        except IOError as e:
+            print("处理文件名时出现异常!IO流出错!", e)
+        except Exception as e:
+            print("处理文件名时出现异常!其他错误!", e)
+
+    getDirFileNamePrivate(rootDir)
+    if datas !=[]:
+        return datas
     else:
-        print("dir不是目录!")
-        return -1
-    try:
-        for rootPath, dirList, fileList in os.walk(path):
-            for file in fileList:
-                if '.git' in rootPath:
-                    continue
-                print(os.path.join(rootPath, file))
-                filePath = str(os.path.join(rootPath, file)) # 获取文件完整位置
-
-
-                filePath = filePath.replace(path, globalVariable.WebsiteRemoteAddress) # 将本地路径转换为博客
-                filePath = filePath.replace("\\", "/") # 将 \ 转换为 /
-
-                temp = filePath.split(":") #通过 : 把URL截断成两个部分
-                filePathTrunk = {
-                    "dir1": temp[0],
-                    "dir2": temp[1]
-                }
-                filePath = filePathTrunk["dir1"] + ":" + quote(filePathTrunk["dir2"])# 通过 quote 转义https: 后面的内容
-                print("处理后链接:", filePath)
-                datas.append(filePath)
-    except IOError as e:
-        print("处理文件名时出现异常!IO流出错!",e)
-    except Exception as e:
-        print("处理文件名时出现异常!其他错误!", e)
-    return datas
-
+        raise RuntimeError("最终返回[datas]数组为空!")
