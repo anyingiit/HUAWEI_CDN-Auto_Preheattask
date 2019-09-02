@@ -30,9 +30,9 @@ def getDirFileName(rootDir):
         try:
             for lists in os.listdir(dir):
                 path = os.path.join(dir, lists)
-                # print(path)
+                #print(path)
                 if os.path.isdir(path):
-                    if not existExcludePath(path):#如果当前目录不是被排除目录,则进行遍历
+                    if not existExcludePath(lists):#如果当前目录不是被排除目录,则进行遍历
                         getDirFileNamePrivate(path)
                     else:
                         print("发现已被排除目录:",path)
