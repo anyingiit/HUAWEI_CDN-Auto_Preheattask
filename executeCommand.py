@@ -18,3 +18,4 @@ def websitelocaGitlCommandDef(command):
         logging.critical("Execute Command[%s]Error!returnCode:[%d]output:[%s]",command,returnCode,str(outText).split("\n"))
     logging.info("returnCode:[%d],output:[%s]",returnCode,str(outText).split("\n"))
     return returnCode,outText
+
