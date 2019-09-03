@@ -1,6 +1,6 @@
 import subprocess
 import globalVariable
-
+import logging
 
 def websitelocaGitlCommandDef(command):
     outText = None
@@ -15,6 +15,6 @@ def websitelocaGitlCommandDef(command):
     except subprocess.CalledProcessError as e:
         outText = e.output
         returnCode= e.returncode
-        print("Execute Command",command," Error!","returnCode:[",returnCode,"]","output:",outText)
-    print("returnCode:[",returnCode,"]","output:",outText)
+        logging.critical("Execute Command[%s]Error!returnCode:[%d]output:[%s]",command,returnCode,outText)
+    logging.info("returnCode:[%d],output:[%s]",returnCode,outText)
     return returnCode,outText

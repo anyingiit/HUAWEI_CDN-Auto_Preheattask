@@ -1,6 +1,7 @@
 import os
 from urllib.parse import quote
 import globalVariable
+import logging
 
 def getDirFileName(rootDir):
     exclude = [".git"]
@@ -16,7 +17,7 @@ def getDirFileName(rootDir):
             "dir2": temp[1]
         }
         resultPath = filePathTrunk["dir1"] + ":" + quote(filePathTrunk["dir2"])  # 通过 quote 转义https: 后面的内容
-        print("处理后链接:", resultPath)
+        logging.info("处理后链接:[%s]", resultPath)
         return resultPath
     def existExcludePath(target):
         for ex in exclude:
@@ -32,14 +33,14 @@ def getDirFileName(rootDir):
                     if not existExcludePath(lists):#如果当前目录不是被排除目录,则进行遍历
                         getDirFileNamePrivate(path)
                     else:
-                        print("发现已被排除目录:",path)
+                        logging.info("发现已被排除目录:[%s]",path)
                 else:
-                    print(path)
+                    logging.info("[%s]加入datas数组",path)
                     datas.append(localPathStrToAnYingBlogStr(path))
         except IOError as e:
-            print("处理文件名时出现异常!IO流出错!", e)
+            logging.warning("处理文件名时出现异常!IO流出错![%s]", e)
         except Exception as e:
-            print("处理文件名时出现异常!其他错误!", e)
+            logging.warning("处理文件名时出现异常!其他错误![%s]", e)
 
     getDirFileNamePrivate(rootDir)
     if datas !=[]:
