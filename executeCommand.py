@@ -15,6 +15,6 @@ def websitelocaGitlCommandDef(command):
     except subprocess.CalledProcessError as e:
         outText = e.output
         returnCode= e.returncode
-        logging.critical("Execute Command[%s]Error!returnCode:[%d]output:[%s]",command,returnCode,outText)
-    logging.info("returnCode:[%d],output:[%s]",returnCode,outText)
+        logging.critical("Execute Command[%s]Error!\nreturnCode:[%d]\noutput:[%s]",command,returnCode,outText)
+    logging.info("returnCode:[%d]\n,output:[%s]",returnCode,outText)
     return returnCode,outText
