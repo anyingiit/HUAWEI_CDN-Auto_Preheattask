@@ -19,7 +19,7 @@ def preheattaskdef():
     preheattask(preheatTask)
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format="[%(levelname)s] - %(asctime)s\n>\tSITE:%(module)s.%(funcName)s - 5\n>\tMSG :%(message)s")
+    logging.basicConfig(level=logging.INFO, format="[%(levelname)s] - %(asctime)s\n>\tSITE:%(module)s.%(funcName)s - %(lineno)d\n>\tMSG :%(message)s")
     while True:
         if nextExecuteInterval != 0:
             logging.info("Waiting-------------> %s <-------------Wating",nextExecuteInterval)
