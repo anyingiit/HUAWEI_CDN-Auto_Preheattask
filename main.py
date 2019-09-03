@@ -44,7 +44,5 @@ if __name__ == "__main__":
                   "command_git_rev_parse_master returnCode:",command_git_rev_parse_master[0],
                   "command_git_rev_parse_origin_master returnCode:",command_git_rev_parse_origin_master[0])
         nextExecuteTime = time.time() + nextExecuteInterval
-        logging.info("lastExecuteTime ==> %s", lastExecuteTime)
-        logging.info("nextExecuteTime ==> %s", nextExecuteTime)
-        logging.info("nextExecuteInterval ==> %s", nextExecuteInterval)
+        logging.info("lastExecuteTime ==> %s\nnextExecuteTime ==> %s\nnextExecuteInterval ==> %s", lastExecuteTime,nextExecuteTime,nextExecuteInterval)
 
