@@ -4,6 +4,7 @@ import globalVariable
 import time
 import executeCommand
 import logging
+from globalFunc import timestampToTime
 
 dir = globalVariable.WebsitelocalPath
 lastExecuteTime = 0.0
@@ -44,5 +45,16 @@ if __name__ == "__main__":
                   "command_git_rev_parse_master returnCode:",command_git_rev_parse_master[0],
                   "command_git_rev_parse_origin_master returnCode:",command_git_rev_parse_origin_master[0])
         nextExecuteTime = time.time() + nextExecuteInterval
-        logging.info("lastExecuteTime ==> %s\nnextExecuteTime ==> %s\nnextExecuteInterval ==> %sM",time.localtime(lastExecuteTime) ,time.localtime(nextExecuteTime) ,nextExecuteInterval/60)
+        logging.info("\n"
+                     "{lastExecuteTimeType:<19s}==>{lastExecuteTime}\n"
+                     "{nextExecuteTimeType:<19s}==>{nextExecuteTime}\n"
+                     "{nextExecuteIntervalType:<19s}==>{nextExecuteInterval}"
+                     .format(lastExecuteTimeType = "lastExecuteTime",lastExecuteTime = timestampToTime(lastExecuteTime),
+                             nextExecuteTimeType = "nextExecuteTime",nextExecuteTime = timestampToTime(nextExecuteTime),
+                             nextExecuteIntervalType = "nextExecuteInterval",nextExecuteInterval = timestampToTime(nextExecuteInterval)))
+        # logging.info("\n"
+        #              "lastExecuteTime ==> [%s]\n"
+        #              "nextExecuteTime ==> [%s]\n"
+        #              "nextExecuteInterval ==> [%sM]"
+        #              "",time.localtime(lastExecuteTime) ,time.localtime(nextExecuteTime) ,nextExecuteInterval/60)
 
