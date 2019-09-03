@@ -31,7 +31,7 @@ if __name__ == "__main__":
             if executeCommand.websitelocaGitlCommandDef("git rev-parse master")[1] == executeCommand.websitelocaGitlCommandDef("git rev-parse origin/master")[1]:
                 nextExecuteInterval = 60
             else:
-                logging.info("|================ starting preheattask... ================|")
+                logging.info("|================ starting pull and preheattask... ================|")
                 executeCommand.websitelocaGitlCommandDef("git pull")
                 preheattaskdef()
                 lastExecuteTime = time.time()
