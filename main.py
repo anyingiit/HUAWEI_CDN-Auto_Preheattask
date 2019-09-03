@@ -3,24 +3,26 @@ from preheattask import preheattask
 import globalVariable
 import time
 import executeCommand
+import logging
 
 dir = globalVariable.WebsitelocalPath
 lastExecuteTime = 0.0
 nextExecuteInterval = 0.0
 nextExecuteTime = 0.0
 def preheattaskdef():
-    print(dir)
+    logging.info(dir)
     datas = getDirFileName(dir)
-    print("Get to datas:",datas)
+    logging.info("Get to datas:",datas)
     preheatTask = {
         "urls": datas
     }
     preheattask(preheatTask)
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO,format="[%(levelname)s]%(asctime)s:%(message)s")
     while True:
         if nextExecuteInterval != 0:
-            print("Waiting-------------> ", nextExecuteInterval, " <-------------Wating")
+            logging.info("Waiting-------------> ", nextExecuteInterval, " <-------------Wating")
         time.sleep(nextExecuteInterval)
         executeCommand.websitelocaGitlCommandDef("git fetch")
         command_git_rev_parse_master = executeCommand.websitelocaGitlCommandDef("git rev-parse master")
@@ -34,11 +36,14 @@ if __name__ == "__main__":
                 lastExecuteTime = time.time()
                 nextExecuteInterval = 1800
         else:
+            logging.critical("Execute Command Error!",
+                  "command_git_rev_parse_master returnCode:",command_git_rev_parse_master[0],
+                  "command_git_rev_parse_origin_master returnCode:",command_git_rev_parse_origin_master[0])
             raise RuntimeError("Execute Command Error!",
                   "command_git_rev_parse_master returnCode:",command_git_rev_parse_master[0],
                   "command_git_rev_parse_origin_master returnCode:",command_git_rev_parse_origin_master[0])
         nextExecuteTime = time.time() + nextExecuteInterval
-        print("lastExecuteTime ==> ", lastExecuteTime)
-        print("nextExecuteTime ==> ", nextExecuteTime)
-        print("nextExecuteInterval ==> ", nextExecuteInterval)
+        logging.info("lastExecuteTime ==> ", lastExecuteTime)
+        logging.info("nextExecuteTime ==> ", nextExecuteTime)
+        logging.info("nextExecuteInterval ==> ", nextExecuteInterval)
 
