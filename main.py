@@ -3,24 +3,26 @@ from preheattask import preheattask
 import globalVariable
 import time
 import executeCommand
+import logging
 
 dir = globalVariable.WebsitelocalPath
 lastExecuteTime = 0.0
 nextExecuteInterval = 0.0
 nextExecuteTime = 0.0
 def preheattaskdef():
-    print(dir)
+    logging.info("dir = %s",dir)
     datas = getDirFileName(dir)
-    print("Get to datas:",datas)
+    logging.info("Get to datas:%s",datas)
     preheatTask = {
         "urls": datas
     }
     preheattask(preheatTask)
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="[%(levelname)s]%(asctime)s:%(message)s")
     while True:
         if nextExecuteInterval != 0:
-            print("Waiting-------------> ", nextExecuteInterval, " <-------------Wating")
+            logging.info("Waiting-------------> %s <-------------Wating",nextExecuteInterval)
         time.sleep(nextExecuteInterval)
         executeCommand.websitelocaGitlCommandDef("git fetch")
         command_git_rev_parse_master = executeCommand.websitelocaGitlCommandDef("git rev-parse master")
@@ -38,7 +40,7 @@ if __name__ == "__main__":
                   "command_git_rev_parse_master returnCode:",command_git_rev_parse_master[0],
                   "command_git_rev_parse_origin_master returnCode:",command_git_rev_parse_origin_master[0])
         nextExecuteTime = time.time() + nextExecuteInterval
-        print("lastExecuteTime ==> ", lastExecuteTime)
-        print("nextExecuteTime ==> ", nextExecuteTime)
-        print("nextExecuteInterval ==> ", nextExecuteInterval)
+        logging.info("lastExecuteTime ==> %s", lastExecuteTime)
+        logging.info("nextExecuteTime ==> %s", nextExecuteTime)
+        logging.info("nextExecuteInterval ==> %s", nextExecuteInterval)
 
