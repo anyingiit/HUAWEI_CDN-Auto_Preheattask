@@ -46,12 +46,12 @@ if __name__ == "__main__":
                   "command_git_rev_parse_origin_master returnCode:",command_git_rev_parse_origin_master[0])
         nextExecuteTime = time.time() + nextExecuteInterval
         logging.info("\n"
-                     "{lastExecuteTimeType:<19s}==>{lastExecuteTime}\n"
-                     "{nextExecuteTimeType:<19s}==>{nextExecuteTime}\n"
-                     "{nextExecuteIntervalType:<19s}==>{nextExecuteInterval}"
-                     .format(lastExecuteTimeType = "lastExecuteTime",lastExecuteTime = timestampToTime(lastExecuteTime),
+                     "{lastExecuteTimeType:<20s}[{lastExecuteTime}]\n"
+                     "{nextExecuteTimeType:<20s}[{nextExecuteTime}]\n"
+                     "{nextExecuteIntervalType:<20s}[{nextExecuteInterval}]"
+                     .format(lastExecuteTimeType = "lastExecuteTime",lastExecuteTime = lastExecuteTime if lastExecuteTime == 0.0 else timestampToTime(lastExecuteTime),
                              nextExecuteTimeType = "nextExecuteTime",nextExecuteTime = timestampToTime(nextExecuteTime),
-                             nextExecuteIntervalType = "nextExecuteInterval",nextExecuteInterval = timestampToTime(nextExecuteInterval)))
+                             nextExecuteIntervalType = "nextExecuteInterval",nextExecuteInterval = nextExecuteInterval))
         # logging.info("\n"
         #              "lastExecuteTime ==> [%s]\n"
         #              "nextExecuteTime ==> [%s]\n"
