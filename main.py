@@ -20,7 +20,7 @@ def preheattaskdef():
     preheattask(preheatTask)
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format="[%(levelname)s] - %(asctime)s\n>\tSITE:%(module)s.%(funcName)s - %(lineno)d\n>\tMSG :%(message)s")
+    logging.basicConfig(level=logging.INFO, format="[%(levelname)s] - %(asctime)s\n>\tSITE:%(module)s.%(funcName)s - %(lineno)d\n>\tMSG :\n-\t%(message)s")
     while True:
         if nextExecuteInterval != 0:
             logging.info("Waiting-------------> %s <-------------Wating",nextExecuteInterval)
@@ -46,9 +46,9 @@ if __name__ == "__main__":
                   "command_git_rev_parse_origin_master returnCode:",command_git_rev_parse_origin_master[0])
         nextExecuteTime = time.time() + nextExecuteInterval
         logging.info("\n"
-                     "\t{lastExecuteTimeType:<20s}[{lastExecuteTime}]\n"
-                     "\t{nextExecuteTimeType:<20s}[{nextExecuteTime}]\n"
-                     "\t{nextExecuteIntervalType:<20s}[{nextExecuteInterval}]"
+                     "{lastExecuteTimeType:<20s}[{lastExecuteTime}]\n"
+                     "{nextExecuteTimeType:<20s}[{nextExecuteTime}]\n"
+                     "{nextExecuteIntervalType:<20s}[{nextExecuteInterval}]"
                      .format(lastExecuteTimeType = "lastExecuteTime",lastExecuteTime = "Never execute" if lastExecuteTime == 0.0 else timestampToTime(lastExecuteTime),
                              nextExecuteTimeType = "nextExecuteTime",nextExecuteTime = timestampToTime(nextExecuteTime),
                              nextExecuteIntervalType = "nextExecuteInterval",nextExecuteInterval = nextExecuteInterval))
