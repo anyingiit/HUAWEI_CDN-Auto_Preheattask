@@ -49,7 +49,7 @@ if __name__ == "__main__":
                      "{lastExecuteTimeType:<20s}[{lastExecuteTime}]\n"
                      "{nextExecuteTimeType:<20s}[{nextExecuteTime}]\n"
                      "{nextExecuteIntervalType:<20s}[{nextExecuteInterval}]"
-                     .format(lastExecuteTimeType = "lastExecuteTime",lastExecuteTime = lastExecuteTime if lastExecuteTime == 0.0 else timestampToTime(lastExecuteTime),
+                     .format(lastExecuteTimeType = "lastExecuteTime",lastExecuteTime = "Never execute" if lastExecuteTime == 0.0 else timestampToTime(lastExecuteTime),
                              nextExecuteTimeType = "nextExecuteTime",nextExecuteTime = timestampToTime(nextExecuteTime),
                              nextExecuteIntervalType = "nextExecuteInterval",nextExecuteInterval = nextExecuteInterval))
         # logging.info("\n"
