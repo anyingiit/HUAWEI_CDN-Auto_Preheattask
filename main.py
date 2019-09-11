@@ -18,7 +18,10 @@ def preheattaskdef():
     preheatTaskDatas = {
         "urls": datas
     }
-    refreshTaskDatas = preheatTaskDatas
+    refreshTaskDatas = {
+        "type": "file",
+        "urls":preheatTaskDatas["urls"]
+    }
     #首先执行缓存刷新,等待5分钟后执行预热!
     logging.info("Now refresh task!")
     refreshTask(refreshTaskDatas)
