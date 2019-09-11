@@ -1,5 +1,6 @@
 from getDirAllFilename import getDirFileName
-from preheattask import preheattask
+from huaweiSDK.preheatTask import preheattask
+from huaweiSDK.refreshTask import refreshTask
 import globalVariable
 import time
 import executeCommand
@@ -14,10 +15,17 @@ def preheattaskdef():
     logging.info("dir = %s",dir)
     datas = getDirFileName(dir)
     logging.info("Get to datas:%s",datas)
-    preheatTask = {
+    preheatTaskDatas = {
         "urls": datas
     }
-    preheattask(preheatTask)
+    refreshTaskDatas = preheatTaskDatas
+    #首先执行缓存刷新,等待5分钟后执行预热!
+    logging.info("Now refresh task!")
+    refreshTask(refreshTaskDatas)
+    logging.info("Refresh OK,Now watting 5 minute!")
+    time.sleep(300)
+    logging.info("Now preheat task!")
+    preheattask(preheatTaskDatas)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="[%(levelname)s] - %(asctime)s\n>\tSITE:%(module)s.%(funcName)s - %(lineno)d\n>\tMSG :\n-\t%(message)s")
