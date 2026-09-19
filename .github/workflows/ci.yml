@@ -1,11 +1,26 @@
 # Source: GitHub starter workflow "Simple workflow" (MIT) — https://github.com/actions/starter-workflows/blob/main/ci/blank.yml
+#
+# Repaired by repocurator (feature 002):
+#   - `push` and `pull_request` triggered on `main`; this repository's
+#     default branch is `dev`, so the workflow had never run on a push to it.
+#   - the test job ran the starter's placeholder echo, so a green check
+#     proved only that the runner could print a sentence.
+#
+# Scope of the "Build" and "Test" steps below: this repository ships no
+# `requirements.txt` or `pyproject.toml`, and `connect.py` / `huaweiSDK/*.py`
+# only work against a live Huawei Cloud account and a local Git checkout at
+# a hardcoded path (see README.md's Prerequisites). Neither is available on
+# a CI runner, so "Build" is a syntax-only compile of every module (it does
+# not execute imports, so the undeclared `openstack` dependency does not need
+# to be installed to run it), and "Test" runs the one unit test that needs no
+# external service: tests/test_smoke.py, added by this repair.
 name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [dev]
   pull_request:
-    branches: [main]
+    branches: [dev]
   workflow_dispatch:
 
 # The workflow token is read-only by default.
@@ -52,7 +67,12 @@ jobs:
         with:
           persist-credentials: false
 
-      # Replace the step below with your project's test command. Pin any setup
-      # action you add to a full commit SHA, like the checkout step above.
-      - name: Run tests
-        run: echo "No tests yet. Replace this step with your project's test command."
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+
+      - name: Build
+        run: python -m compileall -q .
+
+      - name: Test
+        run: python tests/test_smoke.py
